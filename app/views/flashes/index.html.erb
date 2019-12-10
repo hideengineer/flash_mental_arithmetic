@@ -1,2 +1,54 @@
-<h1>Flashes#index</h1>
-<p>Find me in app/views/flashes/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>フラッシュ暗算</title>
+    <link rel="stylesheet" href="./flashes.scss">
+  </head>
+  <body>
+    <div class="header">
+      <div class="header__box">
+        Flash暗算
+      </div>
+    </div>
+
+    <div class="contents">
+      <div class="contents__title">
+        フラッシュ暗算
+      </div>
+      <form class="contents__btn">
+        <select>
+          <option value="0">低速</option>
+          <option value="1">中速</option>
+          <option value="2">高速</option>
+        </select>
+        <select>
+          <option value="0">1桁</option>
+          <option value="1">2桁</option>
+          <option value="2">3桁</option>
+          <option value="3">4桁</option>
+        </select>
+        <select>
+          <option value="0">5口</option>
+          <option value="1">10口</option>
+          <option value="2">15口</option>
+        </select>
+        <div class="contents__start">
+          問題速度・桁数・問題数を選んで、スタートを押してください!!
+        </div>
+        <input type="submit" value="スタート" class="contents__submit">
+      </form>
+      <%# <div class="contents__btn">
+        <div class="contents__btn__icon--trash">
+          <i class="fas fa-trash">
+            <%= link_to "#", class: "header__btn__icon--trash" %>
+          <%# </i> %>
+        <%# </div>
+        <div class="contents__btn__icon--trash">
+          <i class="fas fa-trash">
+            <%= link_to "#", class: "header__btn__icon--trash" %>
+          <%# </i>
+        </div> %> 
+      </div>
+<p>
+</p>
