@@ -1,162 +1,146 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>フラッシュ暗算</title>
-    <link rel="stylesheets" href="./flashes.scss">
-  </head>
-  <body>
-    <%# <div class="header">
-      <div class="header__box">
-        Flash暗算
-      </div>
-    </div> %>
-
-    <div class="contents">
-      <div class="contents__title">
-        フラッシュ暗算
-      </div>
-      <form name="flash" onSubmit="return false;">
-        <input type="text" name="number" class="contents__text">
-        <select name="set1" class="contents__select">
-          <option value="1">1桁</option>
-          <option value="2" selected>2桁</option>
-          <option value="3">3桁</option>
-          <option value="4">4桁</option>
-          <option value="5">5桁</option>
-          <%# <option value="6">6桁</option>
-          <option value="7">7桁</option>
-          <option value="8">8桁</option>
-          <option value="9">9桁</option>
-          <option value="10">10桁</option> %>
-        </select>
-        <select name="set2" class="contents__select">
-          <option value="5">5口</option>
-          <option value="10" selected>10口</option>
-          <option value="15">15口</option>
-          <option value="20">20口</option>
-        </select>
-        <select name="set3" class="contents__select">
-          <option value="2">2秒</option>
-          <option value="1" selected>1秒</option>
-          <option value="0.5">0.5秒</option>
-          <option value="0.3">0.3秒</option>
-          <option value="0.2">0.2秒</option>
-          <option value="0.1">0.1秒</option>
-        </select>
-        <div class="contents__box1">
-          桁数・問題数(口数)・問題速度を選んで、スタートを押してください!
-        </div>
-        <input type="submit" name="b_start" value="スタート" class="contents__submit" onClick="f_start()">
-        <div class="contents__box2">
-          問題終了後は、解答表示ボタンを押すと答えが表示されます!
-        </div>
-        <div class="contents__box3">
-          <b>問題表示枠に答えを入力してから</b>解答表示ボタンを押すと答え合わせができます!<br>※半角数字で入力してください
-        </div>
-      </form>
-      <script type="text/javascript">
-        
-        set = new Array();
-        cd_text = new Array("①","②","③");
-
-        flag = 0;
-        blank = 100;
-
-        function f_start() {
-          if (flag == 0) {
-            //初期値
-            set[0] = document.flash.set1.value;
-            set[1] = document.flash.set2.value;
-            set[2] = document.flash.set3.value;
-            
-            document.flash.b_start.disabled = true;
-            kotae = 0;
-            //タイマー処理
-            count = 3;
-            f_countdown();
-          } else {
-            f_kotae();
-          }
-        }
-
-        function f_countdown() {
-          count--;
-          document.flash.number.value = cd_text[count];
-          if (count == 0) {
-            timerID = setTimeout('f_blank()',1000);
-          } else {
-            timerID = setTimeout('f_countdown()',1000);
-          }
-        }
-
-        function f_count() {
-          count++;
-          
-          //乱数の生成
-          var r = Math.random();
-          r = Math.floor(r * Math.pow(10,set[0])* 0.9 + Math.pow(10,set[0]-1));
-          //数値の表示,カンマをつける
-          document.flash.number.value = getComma(r);
-          kotae += r;
-          timerID = setTimeout('f_blank()',set[2]*1000);
-        }
-        
-        function f_blank() {
-          //空白表示
-          document.flash.number.value = "";
-          if (set[1] == count) {
-            f_clear();
-          } else {
-          timerID = setTimeout('f_count()',blank);
-          }
-        }
-
-        number_format();
-        function number_format() {
-          //初期化
-          document.flash.reset();
-          document.flash.number.value = "";
-          document.flash.b_start.disabled = false;
-          document.flash.b_start.focus();
-        }
-
-        function f_clear() {
-          clearInterval(timerID);
-          // document.flash.number.value = "";
-          document.flash.b_start.disabled = false;
-          document.flash.b_start.value = "解答表示";
-          flag = 1;
-          document.flash.b_start.focus();
-        }
-
-        function f_kotae() {
-          var s = document.flash.number.value;
-          var t = "";
-          if (s != "") {
-            //答え合わせ
-            if (s == kotae) {
-              alert("正解です！！");
-            } else {
-              alert("答えは" + getComma(kotae) + "でした。");
-            }
-          } else {
-            //入力なし
-            alert("答えは" + getComma(kotae) + "です。");
-          }
-          //初期化
-          document.flash.b_start.value = "スタート";
-          flag = 0;
-          document.flash.number.value = "";
-        }
-
-        function getComma(num) {
-          // 効率よく変換させるために、関数replaceで正規表現を使っている
-          num = new String(num).replace(/,/g, "");
-          while(num != (num = num.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
-          return num;
-        }
-      </script>
+<div class="contents">
+  <div class="contents__title">
+    フラッシュ暗算
+  </div>
+  <form name="flash" onSubmit="return false;">
+    <input type="text" name="number" class="contents__text">
+    <select name="set1" class="contents__select">
+      <option value="1">1桁</option>
+      <option value="2" selected>2桁</option>
+      <option value="3">3桁</option>
+      <option value="4">4桁</option>
+      <option value="5">5桁</option>
+      <%# <option value="6">6桁</option>
+      <option value="7">7桁</option>
+      <option value="8">8桁</option>
+      <option value="9">9桁</option>
+      <option value="10">10桁</option> %>
+    </select>
+    <select name="set2" class="contents__select">
+      <option value="5">5口</option>
+      <option value="10" selected>10口</option>
+      <option value="15">15口</option>
+      <option value="20">20口</option>
+    </select>
+    <select name="set3" class="contents__select">
+      <option value="2">2秒</option>
+      <option value="1" selected>1秒</option>
+      <option value="0.5">0.5秒</option>
+      <option value="0.3">0.3秒</option>
+      <option value="0.2">0.2秒</option>
+      <option value="0.1">0.1秒</option>
+    </select>
+    <div class="contents__box1">
+      桁数・問題数(口数)・問題速度を選んで、スタートを押してください!
     </div>
-  </body>
-</html>
+    <input type="submit" name="b_start" value="スタート" class="contents__submit" onClick="f_start()">
+    <div class="contents__box2">
+      問題終了後は、解答表示ボタンを押すと答えが表示されます!
+    </div>
+    <div class="contents__box3">
+      <b>問題表示枠に答えを入力してから</b>解答表示ボタンを押すと答え合わせができます!<br>※半角数字で入力してください
+    </div>
+  </form>
+  <script type="text/javascript">
+        
+    set = new Array();
+    cd_text = new Array("①","②","③");
+
+    flag = 0;
+    blank = 100;
+
+    function f_start() {
+      if (flag == 0) {
+        //初期値
+        set[0] = document.flash.set1.value;
+        set[1] = document.flash.set2.value;
+        set[2] = document.flash.set3.value;
+            
+        document.flash.b_start.disabled = true;
+        kotae = 0;
+        //タイマー処理
+        count = 3;
+        f_countdown();
+      } else {
+        f_kotae();
+      }
+    }
+
+    function f_countdown() {
+      count--;
+      document.flash.number.value = cd_text[count];
+      if (count == 0) {
+        timerID = setTimeout('f_blank()',1000);
+      } else {
+        timerID = setTimeout('f_countdown()',1000);
+      }
+    }
+
+    function f_count() {
+      count++;
+          
+      //乱数の生成
+      var r = Math.random();
+      r = Math.floor(r * Math.pow(10,set[0])* 0.9 + Math.pow(10,set[0]-1));
+      //数値の表示,カンマをつける
+      document.flash.number.value = getComma(r);
+      kotae += r;
+      timerID = setTimeout('f_blank()',set[2]*1000);
+    }
+        
+    function f_blank() {
+      //空白表示
+      document.flash.number.value = "";
+      if (set[1] == count) {
+        f_clear();
+      } else {
+      timerID = setTimeout('f_count()',blank);
+      }
+    }
+
+    number_format();
+    function number_format() {
+      //初期化
+      document.flash.reset();
+      document.flash.number.value = "";
+      document.flash.b_start.disabled = false;
+      document.flash.b_start.focus();
+    }
+
+    function f_clear() {
+      clearInterval(timerID);
+      // document.flash.number.value = "";
+      document.flash.b_start.disabled = false;
+      document.flash.b_start.value = "解答表示";
+      flag = 1;
+      document.flash.b_start.focus();
+    }
+
+    function f_kotae() {
+      var s = document.flash.number.value;
+      var t = "";
+      if (s != "") {
+        //答え合わせ
+        if (s == kotae) {
+          alert("正解です！！");
+        } else {
+          alert("答えは" + getComma(kotae) + "でした。");
+        }
+      } else {
+        //入力なし
+        alert("答えは" + getComma(kotae) + "です。");
+      }
+      //初期化
+      document.flash.b_start.value = "スタート";
+      flag = 0;
+      document.flash.number.value = "";
+    }
+
+    function getComma(num) {
+      // 効率よく変換させるために、関数replaceで正規表現を使っている
+      num = new String(num).replace(/,/g, "");
+      while(num != (num = num.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
+      return num;
+    }
+  </script>
+</div>
